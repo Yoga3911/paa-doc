@@ -1,0 +1,622 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "API",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "https://api.test/api/v1"
+        }
+    ],
+    "paths": {
+        "/user/login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Login",
+                "description": "Login menggunakan Email dan Password",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "nullable": false,
+                                        "default": "mamat@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "nullable": false,
+                                        "default": "123456"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "default": 1,
+                                                    "nullable": false
+                                                },
+                                                "username": {
+                                                    "type": "string",
+                                                    "default": "Example",
+                                                    "nullable": false
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "default": "example@gmail.com",
+                                                    "nullable": false
+                                                },
+                                                "password": {
+                                                    "type": "string",
+                                                    "default": "$2a$04$YIA154Hs0l6gcuwDtEKTw.USIJNJmgZFRt31mHGaqE.4c5FPDO3bq",
+                                                    "nullable": false
+                                                },
+                                                "address": {
+                                                    "type": "string",
+                                                    "default": "Jl Anggur",
+                                                    "nullable": false
+                                                },
+                                                "role_id": {
+                                                    "type": "integer",
+                                                    "default": 1,
+                                                    "nullable": false
+                                                },
+                                                "image": {
+                                                    "type": "string",
+                                                    "default": "https://firebasestorage.googleapis.com/v0/b/test-34a2a.appspot.com/o/1645155203449-5427259544859421852_121.jpg?alt=media&token=32244b2b-288f-42e7-813c-3549bdd8487b",
+                                                    "nullable": false
+                                                },
+                                                "token": {
+                                                    "type": "string",
+                                                    "default": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+                                                    "nullable": false
+                                                }
+                                            }
+                                        },
+                                        "message": {
+                                            "default": "Login berhasil!",
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "boolean",
+                                            "default": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "default": null
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Email atau Password salah"
+                                        },
+                                        "status": {
+                                            "type": "boolean",
+                                            "default": false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "default": null
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Internal Server Error"
+                                        },
+                                        "status": {
+                                            "type": "boolean",
+                                            "default": false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/register": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Register",
+                "description": "Daftar akun baru",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string",
+                                        "default": "Example",
+                                        "nullable": false
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "default": "example@gmail.com",
+                                        "nullable": false
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "default": "123456",
+                                        "nullable": false
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "default": "Jl Anggur 12",
+                                        "nullable": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "username": {
+                                                    "type": "string",
+                                                    "default": "Example",
+                                                    "nullable": false
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "default": "example@gmail.com",
+                                                    "nullable": false
+                                                },
+                                                "password": {
+                                                    "type": "string",
+                                                    "default": "123456",
+                                                    "nullable": false
+                                                },
+                                                "address": {
+                                                    "type": "string",
+                                                    "default": "Jl Anggur 12",
+                                                    "nullable": false
+                                                },
+                                                "role_id": {
+                                                    "type": "integer",
+                                                    "default": 1,
+                                                    "nullable": false
+                                                },
+                                                "image": {
+                                                    "type": "string",
+                                                    "default": "https://firebasestorage.googleapis.com/v0/b/test-34a2a.appspot.com/o/1645155203449-5427259544859421852_121.jpg?alt=media&token=32244b2b-288f-42e7-813c-3549bdd8487b",
+                                                    "nullable": false
+                                                }
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Register berhasil!"
+                                        },
+                                        "status": {
+                                            "type": "boolean",
+                                            "default": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "default": null
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Nama atau Email sudah terdaftar"
+                                        },
+                                        "status": {
+                                            "type": "boolean",
+                                            "default": false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "default": null
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Internal Server Error"
+                                        },
+                                        "status": {
+                                            "type": "boolean",
+                                            "default": false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/profile/{userId}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get user data",
+                "description": "Mendapatkan data user dari database berdasarkan ID",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "query",
+                        "description": "userId menggunakan query parameter",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1,
+                            "example": "/user/profile?userId=1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "default": 1,
+                                                    "nullable": false
+                                                },
+                                                "username": {
+                                                    "type": "string",
+                                                    "default": "Example",
+                                                    "nullable": false
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "default": "example@gmail.com",
+                                                    "nullable": false
+                                                },
+                                                "password": {
+                                                    "type": "string",
+                                                    "default": "123456",
+                                                    "nullable": false
+                                                },
+                                                "address": {
+                                                    "type": "string",
+                                                    "default": "Jl Anggur 12",
+                                                    "nullable": false
+                                                },
+                                                "role_id": {
+                                                    "type": "integer",
+                                                    "default": 1,
+                                                    "nullable": false
+                                                },
+                                                "image": {
+                                                    "type": "string",
+                                                    "default": "https://firebasestorage.googleapis.com/v0/b/test-34a2a.appspot.com/o/1645155203449-5427259544859421852_121.jpg?alt=media&token=32244b2b-288f-42e7-813c-3549bdd8487b",
+                                                    "nullable": false
+                                                }
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Get user data successfully"
+                                        },
+                                        "status": {
+                                            "type": "boolean",
+                                            "default": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "default": null
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "default": "User tidak ditemukan"
+                                        },
+                                        "status": {
+                                            "type": "boolean",
+                                            "default": false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "default": null
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Internal Server Error"
+                                        },
+                                        "status": {
+                                            "type": "boolean",
+                                            "default": false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update user data",
+                "description": "Mengubah data user di menu profile berdasarkan ID",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string",
+                                        "default": "Example",
+                                        "nullable": false
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "default": "example@gmail.com",
+                                        "nullable": false
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "default": "123456",
+                                        "nullable": false
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "default": "Jl Anggur 12",
+                                        "nullable": false
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "default": "https://firebasestorage.googleapis.com/v0/b/test-34a2a.appspot.com/o/1645155203449-5427259544859421852_121.jpg?alt=media&token=32244b2b-288f-42e7-813c-3549bdd8487b",
+                                        "nullable": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "default": 1,
+                                                    "nullable": false
+                                                },
+                                                "username": {
+                                                    "type": "string",
+                                                    "default": "Example",
+                                                    "nullable": false
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "default": "example@gmail.com",
+                                                    "nullable": false
+                                                },
+                                                "password": {
+                                                    "type": "string",
+                                                    "default": "123456",
+                                                    "nullable": false
+                                                },
+                                                "address": {
+                                                    "type": "string",
+                                                    "default": "Jl Anggur 12",
+                                                    "nullable": false
+                                                },
+                                                "role_id": {
+                                                    "type": "integer",
+                                                    "default": 1,
+                                                    "nullable": false
+                                                },
+                                                "image": {
+                                                    "type": "string",
+                                                    "default": "https://firebasestorage.googleapis.com/v0/b/test-34a2a.appspot.com/o/1645155203449-5427259544859421852_121.jpg?alt=media&token=32244b2b-288f-42e7-813c-3549bdd8487b",
+                                                    "nullable": false
+                                                }
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Get user data successfully"
+                                        },
+                                        "status": {
+                                            "type": "boolean",
+                                            "default": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "default": null
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Inputan tidak sesuai"
+                                        },
+                                        "status": {
+                                            "type": "boolean",
+                                            "default": false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "default": null
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Internal Server Error"
+                                        },
+                                        "status": {
+                                            "type": "boolean",
+                                            "default": false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/role/request": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Request to be a seller",
+                "description": "User mengirim permintaan untuk menjadi seller",
+                "requestBody": {
+                    "content": {}
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/user/role/approve/{requestId}": {
+            "patch": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Approve user to be a seller",
+                "description": "Admin menyetujui pengguna untuk menjadi seller",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    }
+}
