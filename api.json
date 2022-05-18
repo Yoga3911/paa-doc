@@ -10,7 +10,7 @@
         }
     ],
     "paths": {
-        "/user/login": {
+        "/users/login": {
             "post": {
                 "tags": [
                     "User"
@@ -156,7 +156,7 @@
                 }
             }
         },
-        "/user/register": {
+        "/users/register": {
             "post": {
                 "tags": [
                     "User"
@@ -302,7 +302,7 @@
                 }
             }
         },
-        "/user/profile/{userId}": {
+        "/users/profile/{userId}": {
             "get": {
                 "tags": [
                     "User"
@@ -312,12 +312,13 @@
                 "parameters": [
                     {
                         "name": "userId",
-                        "in": "query",
-                        "description": "userId menggunakan query parameter",
+                        "in": "path",
+                        "required": true,
+                        "description": "userId menggunakan path parameter",
                         "schema": {
                             "type": "integer",
                             "default": 1,
-                            "example": "/user/profile?userId=1"
+                            "example": "/user/profile/1"
                         }
                     }
                 ],
@@ -438,6 +439,19 @@
                 ],
                 "summary": "Update user data",
                 "description": "Mengubah data user di menu profile berdasarkan ID",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "required": true,
+                        "description": "userId menggunakan path parameter",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1,
+                            "example": "/user/profile/1"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -587,7 +601,7 @@
                 }
             }
         },
-        "/user/role/request": {
+        "/users/request": {
             "post": {
                 "tags": [
                     "User"
@@ -604,13 +618,422 @@
                 }
             }
         },
-        "/user/role/approve/{requestId}": {
+        "/users/approve/{requestId}": {
             "patch": {
                 "tags": [
                     "User"
                 ],
                 "summary": "Approve user to be a seller",
                 "description": "Admin menyetujui pengguna untuk menjadi seller",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "requestId",
+                    "in": "path",
+                    "required": true,
+                    "description": "requestId menggunakan path parameter",
+                    "schema": {
+                        "type": "integer",
+                        "default": 1,
+                        "example": "/users/approve/1"
+                    }
+                }
+            ]
+            
+        },
+        "/products": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get all product",
+                "description": "Mengambil semua data produk",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Add product",
+                "description": "Menambah data produk",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Update product",
+                "description": "Mengubah data produk",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Delete product",
+                "description": "Menghapus data produk",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+            
+        },
+        "/products/{productId}": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get one product",
+                "description": "Mengambil satu data produk",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "productId",
+                        "in": "path",
+                        "required": true,
+                        "description": "productId menggunakan path parameter",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1,
+                            "example": "/products/1"
+                        }
+                    }
+                ]
+            }
+        },
+        "/products/page": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Filter product",
+                "description": "Mengambil produk berdasarkan page",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "page",
+                    "in": "query",
+                    "required": true,
+                    "description": "page menggunakan query parameter",
+                    "schema": {
+                        "type": "integer",
+                        "default": 1,
+                        "example": "/products?page=1"
+                    }
+                }
+            ]
+        },
+        "/products/request/{productId}": {
+            "post": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Request product",
+                "description": "Mengirim permintaan persetujuan produk yang diajukan seller",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "productId",
+                    "in": "path",
+                    "required": true,
+                    "description": "productId menggunakan path parameter",
+                    "schema": {
+                        "type": "integer",
+                        "default": 1,
+                        "example": "/products/request/1"
+                    }
+                }
+            ]
+        },
+        "/products/approve/{productId}": {
+            "post": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Approve product",
+                "description": "Menyetujui produk yang diajukan seller",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "productId",
+                    "in": "path",
+                    "required": true,
+                    "description": "productId menggunakan path parameter",
+                    "schema": {
+                        "type": "integer",
+                        "default": 1,
+                        "example": "/products/request/1"
+                    }
+                }
+            ]
+        },
+        "/cart/{productId}": {
+            "post": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Add to cart",
+                "description": "Menambahkan produk ke keranjang",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Get product data from cart",
+                "description": "Menampilkan data produk dalam keranjang user",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Delete from cart",
+                "description": "Menghapus produk dari keranjang",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "productId",
+                    "in": "path",
+                    "required": true,
+                    "description": "proudctId menggunakan path parameter",
+                    "schema": {
+                        "type": "integer",
+                        "default": 1,
+                        "example": "/cart/1"
+                    }
+                }
+            ]
+        },
+        "/review/{productId}": {
+            "post": {
+                "tags": [
+                    "Review"
+                ],
+                "summary": "Add Review and Rating",
+                "description": "Memberikan review dan rating terhadap seuatu produk",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Review"
+                ],
+                "summary": "Fetch Review and Rating data",
+                "description": "Menampilkan data review dan rating",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Review"
+                ],
+                "summary": "Change Review and Rating data",
+                "description": "Mengubah data review dan rating",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Review"
+                ],
+                "summary": "Delete Review and Rating data",
+                "description": "Menghapus data review dan rating",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "productId",
+                    "in": "path",
+                    "required": true,
+                    "description": "productId menggunakan path parameter",
+                    "schema": {
+                        "type": "integer",
+                        "default": 1,
+                        "example": "/products/review/1"
+                    }
+                }
+            ]
+        },
+        "/payment": {
+            "post": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "Payment",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+            
+        },
+        "/payment/userId": {
+            "get": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "Payment History",
+                "description": "Menampilkan payment history tiap user",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "userId",
+                    "in": "query",
+                    "required": true,
+                    "description": "userId menggunakan query parameter",
+                    "schema": {
+                        "type": "integer",
+                        "default": 1,
+                        "example": "/payment?userId=1"
+                    }
+                }
+            ]
+        },
+        "/checkout/{userId}": {
+            "post": {
+                "tags": [
+                    "Checkout"
+                ],
+                "summary": "Checkout",
+                "description": "Melakukan checkout",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "userId",
+                    "in": "path",
+                    "required": true,
+                    "description": "userId menggunakan path parameter",
+                    "schema": {
+                        "type": "integer",
+                        "default": 1,
+                        "example": "/userId/1"
+                    }
+                }
+            ]
+        },
+        "/checkout/userId": {
+            "get": {
+                "tags": [
+                    "Checkout"
+                ],
+                "summary": "Get Checkout data",
+                "description": "Mengambil data checkout dari user berdasarkan id",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Checkout"
+                ],
+                "summary": "Change Checkout status",
+                "description": "Mengubah status checkout",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "userId",
+                    "in": "query",
+                    "required": true,
+                    "description": "userId menggunakan query parameter",
+                    "schema": {
+                        "type": "integer",
+                        "default": 1,
+                        "example": "/checkout?userId=1"
+                    }
+                }
+            ]
+        },
+        "/otp": {
+            "post": {
+                "tags": [
+                    "OTP"
+                ],
+                "summary": "OTP",
+                "description": "Mengirim kode OTP ke email",
                 "responses": {
                     "200": {
                         "description": "OK"
